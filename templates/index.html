@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistant PDF</title>
+    <style>
+      :root {
+        --primary-color: #2563eb;
+        --secondary-color: #1e40af;
+        --background-color: #f8fafc;
+        --text-color: #1e293b;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: var(--primary-color);
+        animation: fadeIn 0.8s ease-in;
+      }
+
+      form {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        animation: slideUp 0.5s ease-out;
+      }
+
+      @media (max-width: 640px) {
+        form {
+          flex-direction: column;
+        }
+      }
+
+      input[type="text"] {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 0.75rem;
+        background-color: white;
+        transition: all 0.3s ease;
+        outline: none;
+      }
+
+      input[type="text"]:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+      }
+
+      button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
+        background-color: var(--primary-color);
+        border: none;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+
+      button:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-1px);
+      }
+
+      button:active {
+        transform: translateY(1px);
+      }
+
+      .response {
+        width: 100%;
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px var(--shadow-color);
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      .response h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+      }
+
+      .response p {
+        color: var(--text-color);
+        line-height: 1.8;
+        white-space: pre-wrap;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📚 Assistant de Lecture PDF</h1>
+      <form method="post">
+        <input
+          type="text"
+          name="prompt"
+          placeholder="Pose ta question sur les documents..."
+          required
+        />
+        <button type="submit">Envoyer</button>
+      </form>
+
+      {% if answer %}
+      <div class="response">
+        <h3>💬 Réponse</h3>
+        <p>{{ answer }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
